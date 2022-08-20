@@ -1,0 +1,70 @@
+.hours__title {
+  text-align: center;
+}
+
+.hours__none {
+  color: rgb(70, 70, 70);
+  font-size: 1.15rem;
+  margin: 0 1em;
+  text-align: center;
+}
+
+.session {
+  margin: 1em;
+  padding: 1em;
+  border-radius: 10px;
+  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.25);
+}
+
+.session__top {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.session__top__date,
+.session__bottom__location {
+  justify-self: baseline;
+}
+
+.session__top__hours__text {
+  display: inline;
+  margin: 0 0.15em;
+}
+
+.session__top__hours__text--large {
+  font-size: 1.5rem;
+}
+
+.session__top__hours__text--small {
+  font-size: 1rem;
+}
+
+.session__top__details,
+.session__bottom__weather {
+  justify-self: end;
+}
+
+.session__top__details__text {
+  display: flex;
+  align-items: center;
+}
+
+.session__bottom {
+  display: none;
+}
+.session__top__details .material-symbols-outlined {
+  transition: transform 250ms ease-in-out;
+}
+.active .session__top__details .material-symbols-outlined {
+  transform: rotate(180deg);
+}
+
+.active .session__bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  place-items: center;
+  text-align: center;
+}

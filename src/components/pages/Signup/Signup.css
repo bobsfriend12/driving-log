@@ -1,0 +1,17 @@
+.signup {
+  transform: translateY(50%);
+}
+
+.signup__title {
+  text-align: center;
+}
+
+.signup__login {
+  text-align: center;
+  font-size: 1.05rem;
+}
+
+.signup__link {
+  color: var(--clr-primary);
+  text-align: center;
+}

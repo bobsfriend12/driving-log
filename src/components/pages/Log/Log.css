@@ -1,0 +1,43 @@
+.log {
+  padding: 0 1em;
+}
+
+.log__btn,
+.log__link {
+  background-color: transparent;
+  color: var(--clr-primary);
+  border: none;
+  display: flex;
+  place-items: center;
+  margin: 1em 0.5em 0 0;
+  text-decoration: none;
+}
+
+.log__link {
+  margin: 0;
+}
+
+.log__hours {
+  margin-bottom: 1em;
+  margin-top: 1em;
+}
+
+.log__hours,
+.log__date,
+.log__location,
+.log__time,
+.log__weather {
+  margin-top: 1em;
+}
+
+.log__hours > * {
+  margin: 0 0.5em;
+}
+
+.log__hours > .log__label {
+  margin-left: 0;
+}
+
+.log input {
+  margin-left: 0.5em;
+}

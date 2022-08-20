@@ -1,0 +1,17 @@
+.login {
+  transform: translateY(50%);
+}
+
+.login__title {
+  text-align: center;
+}
+
+.login__signup {
+  text-align: center;
+  font-size: 1.05rem;
+}
+
+.login__link {
+  color: var(--clr-primary);
+  text-align: center;
+}

@@ -1,0 +1,16 @@
+.btn.btn {
+  background-color: var(--clr-primary);
+  color: white;
+  border: none;
+  margin: 0.5em auto;
+  width: calc(100% - 2em);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 32px;
+  font-size: 1.5rem;
+}
+
+.btn__icon--hidden {
+  opacity: 0;
+}

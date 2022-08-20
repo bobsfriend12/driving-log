@@ -1,0 +1,8 @@
+.input {
+  display: block;
+  margin: 1em auto;
+  padding: 0.25em;
+  font-size: 1.15rem;
+  width: calc(100% - 2.5em);
+  accent-color: var(--clr-primary);
+}
