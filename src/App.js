@@ -8,6 +8,7 @@ import PasswordReset from "./components/pages/PasswordReset/PasswordReset";
 
 import "./index.css";
 import Log from "./components/pages/Log/Log";
+import Confirm from "./components/pages/Confirm/Confirm";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/log" element={<Log />} />
         <Route path="/password-reset" element={<PasswordReset />} />
+        <Route path="/confirm" element={<Confirm />} />
       </Routes>
     </BrowserRouter>
   );

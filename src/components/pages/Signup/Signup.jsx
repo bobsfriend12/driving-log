@@ -5,6 +5,7 @@ import {
   createUserWithEmailAndPassword,
   setPersistence,
   browserLocalPersistence,
+  sendEmailVerification
 } from "firebase/auth";
 import Btn from "../../block/Btn/Btn";
 import TextInput from "../../block/Input/Input";
@@ -29,6 +30,7 @@ function Signup() {
     if (password === confPwd) {
       setPersistence(auth, browserLocalPersistence).then(() => {
         createUserWithEmailAndPassword(auth, email, password).then(() => {
+          sendEmailVerification(auth.currentUser);
           setSignedIn(true);
         });
       });

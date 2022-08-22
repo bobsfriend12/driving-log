@@ -18,7 +18,7 @@ function Login() {
   const [signedIn, setSignedIn] = useState(false);
 
   if (signedIn) {
-    return <Navigate replace to="/home" />;
+    return <Navigate replace to="/" />;
   }
 
   const handleSignIn = () => {
