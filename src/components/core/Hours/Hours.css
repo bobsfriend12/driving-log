@@ -52,6 +52,22 @@
   align-items: center;
 }
 
+.session__actions {
+  margin-top: 1em;
+  display: flex;
+  justify-content: space-between;
+  grid-column: 1/4;
+  width: 100%;
+}
+
+.session__actions__left {
+  color: var(--clr-primary);
+}
+
+.session__actions__right {
+  color: rgb(175, 0, 0);
+}
+
 .session__bottom {
   display: none;
 }

@@ -6,7 +6,9 @@
   text-align: center;
 }
 
-.login__signup {
+.login__signup,
+.login__forgot {
+  margin-top: 0.5em;
   text-align: center;
   font-size: 1.05rem;
 }

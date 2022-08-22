@@ -15,8 +15,17 @@ function Log() {
     return local.toJSON().slice(0, 10);
   };
 
+  function uuid(mask = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx') {
+    return `${mask}`.replace(/[xy]/g, function(c) {
+        var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+        return v.toString(16);
+    });
+}
+
+
   const today = new Date().toDateInputValue();
 
+  const [id, setId] = useState(uuid());
   const [date, setDate] = useState(today);
   const [hours, setHours] = useState("0");
   const [minutes, setMinutes] = useState("00");
@@ -47,6 +56,7 @@ function Log() {
     console.log(sessionHours);
 
     const session = {
+      id: id,
       date: {
         day: sessionDate.getDate() + 1,
         month: sessionDate.getMonth() + 1,
@@ -141,14 +151,14 @@ function Log() {
             type="radio"
             name="time"
             id="day"
-            onChange={e => setTime("day")}
+            onChange={e => setTime("Day")}
           />
           <label htmlFor="day">Day</label>
           <input
             type="radio"
             name="time"
             id="night"
-            onChange={e => setTime("night")}
+            onChange={e => setTime("Night")}
           />
           <label htmlFor="night">Night</label>
         </div>
@@ -158,14 +168,14 @@ function Log() {
             type="radio"
             name="weather"
             id="clear"
-            onChange={e => setWeather("clear")}
+            onChange={e => setWeather("Clear")}
           />
           <label htmlFor="clear">Clear</label>
           <input
             type="radio"
             name="weather"
             id="wet"
-            onChange={e => setWeather("wet")}
+            onChange={e => setWeather("Wet")}
           />
           <label htmlFor="wet">Wet</label>
         </div>

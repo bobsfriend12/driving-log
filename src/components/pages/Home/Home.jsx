@@ -14,24 +14,28 @@ import { collection, getDoc, doc, setDoc } from "firebase/firestore";
 import "./Home.css";
 import { Link, Navigate } from "react-router-dom";
 
+//put it out here so that when
+//the comp is rerendered it doesn't
+//unset itself.
+let userId;
+
 function Home() {
   const [signedIn, setSignedIn] = useState(true);
   const [loading, setLoading] = useState(true);
   const [sessions, setSessions] = useState([]);
 
-  let userId;
-
   useEffect(() => {
-    onAuthStateChanged(auth, user => {
+    onAuthStateChanged(auth, (user) => {
       if (!user) {
         setSignedIn(false);
       } else {
+        // setUserId(user.uid);
         userId = user.uid;
 
         const sessionsRef = collection(firestore, "sessions");
         const docRef = doc(firestore, "sessions", userId);
         if (!localStorage.getItem("sessions")) {
-          getDoc(docRef).then(doc => {
+          getDoc(docRef).then((doc) => {
             if (doc.exists()) {
               console.log(doc.data().sessions);
               if (typeof doc.data().sessions !== "object") {
@@ -121,14 +125,14 @@ function Home() {
         />
         <Btn
           text="Sign Out"
-          onClick={e => {
+          onClick={(e) => {
             localStorage.removeItem("sessions");
             localStorage.removeItem("last_refreshed");
             signOut(auth).then(() => setSignedIn(false));
           }}
         />
         <Stats sessions={sessions} />
-        <Hours sessions={sessions} />
+        <Hours sessions={sessions} userId={userId} />
       </section>
     </div>
   );

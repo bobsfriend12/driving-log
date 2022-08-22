@@ -1,15 +1,63 @@
 import React, { useState, useEffect } from "react";
+import { doc, setDoc } from "firebase/firestore";
+
+import { firestore } from "../../../firebase";
+
+import Confirm from "../../block/Confirm/Confirm";
 
 import "./Hours.css";
+import { defaultStyles } from "react-modal";
 
-function Hours({ sessions }) {
+function Hours({ sessions, userId }) {
   const [activeSessionIndex, setActiveSessionIndex] = useState(999999999);
+  const [isOpen, setIsOpen] = useState(false);
+  const [modalId, setModalId] = useState();
   // const [loading, setLoading] = useState(true);
 
   console.log(sessions);
   // console.log(loading);
 
-  const timeToString = time => {
+  function openModal(id) {
+    setIsOpen(true);
+    setModalId(id);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function onDelete() {
+    const existSessions = JSON.parse(localStorage.getItem("sessions"));
+
+    console.log("deleting session");
+
+    let delSessionIndex = existSessions.findIndex((i) => i.id === modalId);
+
+    console.log(delSessionIndex);
+
+    let sessionsCopy = sessions;
+
+    sessionsCopy.splice(delSessionIndex, 1);
+
+    // const newSessions = existSessions.splice(
+    //   delSessionIndex,
+    //   delSessionIndex + 1
+    // );
+
+    console.log(sessionsCopy);
+
+    console.log(userId);
+
+    localStorage.setItem("sessions", JSON.stringify(sessionsCopy));
+
+    setDoc(doc(firestore, "sessions", userId), {
+      sessions: sessionsCopy,
+    });
+
+    setIsOpen(false);
+  }
+
+  const timeToString = (time) => {
     const hours = Math.floor(time);
     const dec = time - hours;
 
@@ -41,6 +89,13 @@ function Hours({ sessions }) {
 
   return (
     <section className="hours">
+      <Confirm
+        isOpen={isOpen}
+        onConfirm={onDelete}
+        onCancel={closeModal}
+        modalBody="Are you sure you want to delete this driving session? This action is irreversable."
+        modalTitle="Delete Session"
+      />
       <h2 className="hours__title">Driving Hours</h2>
       <div className="hours__container">
         {view === "no-sessions" ? (
@@ -105,6 +160,21 @@ function Hours({ sessions }) {
                     <div className="session__bottom__weather">
                       <div className="weather__top">{item.weather}</div>
                       <div className="weather__bottom">Weather</div>
+                    </div>
+                    <div className="session__actions">
+                      <div className="session__actions__left">
+                        <span className="material-symbols-outlined">edit</span>
+                      </div>
+                      <div className="session__actions__right">
+                        <span
+                          className="material-symbols-outlined"
+                          onClick={() => {
+                            openModal(item.id);
+                          }}
+                        >
+                          delete
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>

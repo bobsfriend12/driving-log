@@ -49,6 +49,12 @@ function Login() {
           </Link>
           .
         </p>
+        <p className="login__forgot">
+          Did you forget your password?{" "}
+          <Link to="/password-reset" className="login__link">
+            Reset it.
+          </Link>
+        </p>
       </section>
     </>
   );
