@@ -8,16 +8,16 @@ function Stats({ sessions }) {
   let nightTime = 0;
   let timeLeft = 50;
 
-  sessions.forEach(session => {
+  sessions.forEach((session) => {
     totalTime += session.hours;
     timeLeft -= session.hours;
-    if (session.time === "night") {
+    if (session.time === "Night") {
       nightTime += session.hours;
       nightLeft -= session.hours;
     }
   });
 
-  const timeToString = time => {
+  const timeToString = (time) => {
     const hours = Math.floor(time);
     const dec = time - hours;
 
