@@ -12,20 +12,28 @@ import {
 } from "firebase/auth";
 import { auth } from "../../../firebase";
 
+import useNotification from "../../../hooks/useNotification";
+
 function Login() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [signedIn, setSignedIn] = useState(false);
+  const sendNotification = useNotification();
 
   if (signedIn) {
     return <Navigate replace to="/" />;
   }
 
+
   const handleSignIn = () => {
     setPersistence(auth, browserLocalPersistence).then(() => {
-      signInWithEmailAndPassword(auth, email, password).then(() =>
-        setSignedIn(true)
-      );
+      signInWithEmailAndPassword(auth, email, password).then(() => {
+        setSignedIn(true);
+      }
+      ).catch((err) => {
+        alert(err);
+        sendNotification("error", err.message);
+      });
     });
   };
 

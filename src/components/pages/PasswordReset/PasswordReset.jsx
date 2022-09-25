@@ -9,16 +9,23 @@ import {auth} from "../../../firebase";
 import "./PasswordReset.css";
 import { Link } from "react-router-dom";
 
+import useNotification from "../../../hooks/useNotification";
+import TextInput from "../../block/Input/Input";
+
 export default function PasswordReset() {
   const [emailSent, setEmailSent] = useState(false);
   const [email, setEmail] = useState("");
 
+  const sendNotification = useNotification();
+
   function onSubmit(e) {
     e.preventDefault();
 
-    sendPasswordResetEmail(auth, email);
+    sendPasswordResetEmail(auth, email).then(() => setEmailSent(true)).catch((err) => {
+      sendNotification("error", err.message)
+    });
 
-    setEmailSent(true);
+    // setEmailSent(true);
   }
   return (
     <>
@@ -32,11 +39,12 @@ export default function PasswordReset() {
               className="reset__form"
               onSubmit={(e) => onSubmit(e)}
             >
-              <input
+              <TextInput
                 type="text"
                 placeholder="Email"
                 className="reset__form__field"
-                onChange={(e) => setEmail(e.target.value)}
+                // onChange={(e) => setEmail(e.target.value)}
+                contentState={setEmail}
               />
 
               <Btn
@@ -49,6 +57,9 @@ export default function PasswordReset() {
                 }
               />
             </form>
+            <p className="reset__login">
+              Go back to <Link className="reset__link" to="/login">Login</Link>
+            </p>
           </div>
         ) : (
           <div className="reset__wrapper">

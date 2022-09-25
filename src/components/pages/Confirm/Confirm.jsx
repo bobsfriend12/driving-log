@@ -28,15 +28,16 @@ export default function Confirm() {
             We sent you a confirmation email. Please click the link in it to
             continue.
           </p>
+          <Link className="reset__link" to="/login">I have confirmed my email.</Link>
           <Btn text="Resend Email" onClick={resendHandler} />
       </div>) : (
                   <div className="confirm__wrapper">
                   <p className="confirm__sent">
-                    An password reset email has been sent to {email}. Click the link
-                    in that email to reset your password.
+                    An a confirmation email has been sent to {email}. Click the link
+                    in that email to confirm your account.
                   </p>
                   <p className="confirm__login">
-                    After you verify your email you can <Link className="reset__link" to="/login">Login</Link>
+                    After you verify your email you can <Link className="reset__link" to="/">Login</Link>
                   </p>
                 </div>
       )}

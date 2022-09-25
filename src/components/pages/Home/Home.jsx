@@ -13,6 +13,7 @@ import { collection, getDoc, doc, setDoc } from "firebase/firestore";
 
 import "./Home.css";
 import { Link, Navigate } from "react-router-dom";
+import useNotification from "../../../hooks/useNotification";
 
 //put it out here so that when
 //the comp is rerendered it doesn't
@@ -23,6 +24,8 @@ function Home() {
   const [signedIn, setSignedIn] = useState(true);
   const [loading, setLoading] = useState(true);
   const [sessions, setSessions] = useState([]);
+  const sendNotification = useNotification();
+
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -61,7 +64,7 @@ function Home() {
               setSessions([]);
               setLoading(false);
             }
-          });
+          }).catch(() => sendNotification("error", "Failed to get logged hours"));
         } else {
           setSessions(JSON.parse(localStorage.getItem("sessions")));
           setLoading(false);
@@ -69,6 +72,7 @@ function Home() {
       }
     });
   }, []);
+
 
   // console.log(docRef);
 
@@ -113,7 +117,7 @@ function Home() {
 
   return (
     <div>
-      <Navbar />
+      <Navbar icon="manage_accounts" loggedIn={true} />
       <section className="home">
         <Btn
           icon="add"

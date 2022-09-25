@@ -1,0 +1,9 @@
+.settings {
+
+    padding: 1em;
+}
+
+.settings__heading {
+    font-size: 1.3rem;
+    text-align: left;
+}
