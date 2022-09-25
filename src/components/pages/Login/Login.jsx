@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import Navbar from "../../core/Navbar/Navbar";
 import Btn from "../../block/Btn/Btn";
 
@@ -19,21 +20,28 @@ function Login() {
   const [password, setPassword] = useState();
   const [signedIn, setSignedIn] = useState(false);
   const sendNotification = useNotification();
+  const [user, loading, error] = useAuthState(auth);
+
+  useEffect(() => {
+    if (user) {
+      setSignedIn(true);
+    }
+  }, [user, loading]);
 
   if (signedIn) {
     return <Navigate replace to="/" />;
   }
 
-
   const handleSignIn = () => {
     setPersistence(auth, browserLocalPersistence).then(() => {
-      signInWithEmailAndPassword(auth, email, password).then(() => {
-        setSignedIn(true);
-      }
-      ).catch((err) => {
-        alert(err);
-        sendNotification("error", err.message);
-      });
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          setSignedIn(true);
+        })
+        .catch((err) => {
+          alert(err);
+          sendNotification("error", err.message);
+        });
     });
   };
 
