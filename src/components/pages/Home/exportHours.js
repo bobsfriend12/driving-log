@@ -153,7 +153,7 @@ export default async function exportHours(data) {
 	const pdfBytes = await pdfDoc.save();
 
 	// Trigger the browser to download the PDF document
-	const pdfToShare = new File(pdfBytes, "Driving Hours.pdf", {
+	const pdfToShare = new File([pdfBytes], "Driving Hours.pdf", {
 		type: "application/pdf",
 	});
 	const shareData = {
